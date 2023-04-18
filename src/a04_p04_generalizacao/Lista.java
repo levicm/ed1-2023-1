@@ -1,0 +1,83 @@
+package a04_p04_generalizacao;
+
+import a04_p03_aloc_din.Aluno;
+
+public class Lista {
+
+	private Object[] arranjo = new Object[20];
+	private int quantidade = 0;
+
+	public void adiciona(Object aluno) {
+		garanteEspaco();
+		arranjo[quantidade] = aluno;
+		quantidade++;
+	}
+
+	public void adiciona(Object aluno, int posicao) {
+		// Se a posicao for válida...
+		if (posicao <= quantidade) {
+			garanteEspaco();
+			if (posicao < quantidade) {
+				// Deslocando os elementos posteriores
+				for (int i = quantidade; i > posicao; --i) {
+					arranjo[i] = arranjo[i - 1];
+				}
+			}
+			arranjo[posicao] = aluno;
+			quantidade++;
+		}
+	}
+
+	private void garanteEspaco() {
+		if (quantidade == arranjo.length) {
+			int novoTamanho = arranjo.length * 2;
+			Object[] novoArranjo = new Object[novoTamanho];
+			for (int i = 0; i < quantidade; ++i) {
+				novoArranjo[i] = arranjo[i];
+			}
+			this.arranjo = novoArranjo;
+		}
+	}
+
+	public Object pega(int posicao) {
+		if (posicao <= quantidade()) {
+			return arranjo[posicao];
+		}
+		return null;
+	}
+
+	public void remove(int posicao) {
+		if (posicao < quantidade) {
+			for (int i = posicao; i < quantidade; ++i) {
+				arranjo[i] = arranjo[i + 1];
+			}
+			quantidade--;
+		}
+	}
+
+	public int quantidade() {
+		return this.quantidade;
+	}
+
+	public boolean contem(Aluno aluno) {
+		// Implementar
+		return false;
+	}
+
+	@Override
+	public String toString() {
+		String resultado = "[";
+		for (int i = 0; i < arranjo.length; ++i) {
+			if (arranjo[i] != null) {
+				if (i > 0) {
+					resultado += ", ";
+				}
+				resultado += arranjo[i];
+			} else {
+				break;
+			}
+		}
+		resultado += "]";
+		return resultado;
+	}
+}
