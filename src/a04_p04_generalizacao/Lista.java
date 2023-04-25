@@ -1,19 +1,17 @@
 package a04_p04_generalizacao;
 
-import a04_p03_aloc_din.Aluno;
-
 public class Lista {
 
 	private Object[] arranjo = new Object[20];
 	private int quantidade = 0;
 
-	public void adiciona(Object aluno) {
+	public void adiciona(Object elemento) {
 		garanteEspaco();
-		arranjo[quantidade] = aluno;
+		arranjo[quantidade] = elemento;
 		quantidade++;
 	}
 
-	public void adiciona(Object aluno, int posicao) {
+	public void adiciona(Object elemento, int posicao) {
 		// Se a posicao for válida...
 		if (posicao <= quantidade) {
 			garanteEspaco();
@@ -23,7 +21,7 @@ public class Lista {
 					arranjo[i] = arranjo[i - 1];
 				}
 			}
-			arranjo[posicao] = aluno;
+			arranjo[posicao] = elemento;
 			quantidade++;
 		}
 	}
@@ -57,11 +55,6 @@ public class Lista {
 
 	public int quantidade() {
 		return this.quantidade;
-	}
-
-	public boolean contem(Aluno aluno) {
-		// Implementar
-		return false;
 	}
 
 	@Override

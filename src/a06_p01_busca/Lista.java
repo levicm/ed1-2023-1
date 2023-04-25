@@ -65,6 +65,14 @@ public class Lista {
 		}
 		return -1;
 	}
+	
+	public int buscaUltimo(Object chave) {
+		return -1;
+	}
+	
+	public void removeTodos(Object chave) {
+		
+	}
 
 	@Override
 	public String toString() {

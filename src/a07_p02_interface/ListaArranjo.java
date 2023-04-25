@@ -1,17 +1,17 @@
-package a04_p05_generics;
+package a07_p02_interface;
 
-public class Lista<T> {
+public class ListaArranjo implements Lista {
 
 	private Object[] arranjo = new Object[20];
 	private int quantidade = 0;
 
-	public void adiciona(T elemento) {
+	public void adiciona(Object elemento) {
 		garanteEspaco();
 		arranjo[quantidade] = elemento;
 		quantidade++;
 	}
 
-	public void adiciona(T elemento, int posicao) {
+	public void adiciona(Object elemento, int posicao) {
 		// Se a posicao for válida...
 		if (posicao <= quantidade) {
 			garanteEspaco();
@@ -37,10 +37,9 @@ public class Lista<T> {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public T pega(int posicao) {
+	public Object pega(int posicao) {
 		if (posicao <= quantidade()) {
-			return (T) arranjo[posicao];
+			return arranjo[posicao];
 		}
 		return null;
 	}

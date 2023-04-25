@@ -1,6 +1,6 @@
-package a04_p05_generics;
+package a07_p03_interface_e_generics;
 
-public class Lista<T> {
+public class ListaArranjo<T> implements Lista<T> {
 
 	private Object[] arranjo = new Object[20];
 	private int quantidade = 0;
@@ -37,7 +37,6 @@ public class Lista<T> {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public T pega(int posicao) {
 		if (posicao <= quantidade()) {
 			return (T) arranjo[posicao];
