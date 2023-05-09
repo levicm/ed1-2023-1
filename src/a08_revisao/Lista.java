@@ -1,4 +1,4 @@
-package a07_p02_interface;
+package a08_revisao;
 
 public interface Lista {
 	public void adiciona(Object obj);
@@ -7,4 +7,8 @@ public interface Lista {
 	public int busca(Object elemento);
 	public void remove(int pos);
 	public int quantidade();
+
+	public void removeTodos(Object chave);
+	public void copia(Object[] arranjo);
+	public boolean igual(Lista lista);
 }

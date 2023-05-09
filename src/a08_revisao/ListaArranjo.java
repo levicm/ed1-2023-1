@@ -1,17 +1,17 @@
-package a07_p03_interface_e_generics;
+package a08_revisao;
 
-public class ListaArranjo<T> implements Lista<T> {
+public class ListaArranjo implements Lista {
 
 	private Object[] arranjo = new Object[20];
 	private int quantidade = 0;
 
-	public void adiciona(T elemento) {
+	public void adiciona(Object elemento) {
 		garanteEspaco();
 		arranjo[quantidade] = elemento;
 		quantidade++;
 	}
 
-	public void adiciona(T elemento, int posicao) {
+	public void adiciona(Object elemento, int posicao) {
 		// Se a posicao for válida...
 		if (posicao <= quantidade) {
 			garanteEspaco();
@@ -37,15 +37,15 @@ public class ListaArranjo<T> implements Lista<T> {
 		}
 	}
 
-	public T pega(int posicao) {
+	public Object pega(int posicao) {
 		if (posicao <= quantidade()) {
-			return (T) arranjo[posicao];
+			return arranjo[posicao];
 		}
 		return null;
 	}
 
 	public void remove(int posicao) {
-		if (posicao < quantidade) {
+		if (posicao >= 0 && posicao < quantidade) {
 			for (int i = posicao; i < quantidade; ++i) {
 				arranjo[i] = arranjo[i + 1];
 			}
@@ -57,7 +57,7 @@ public class ListaArranjo<T> implements Lista<T> {
 		return this.quantidade;
 	}
 
-	public int busca(T elemento) {
+	public int busca(Object elemento) {
 		for (int i = 0; i < quantidade; ++i) {
 			if (elemento.equals(arranjo[i])) {
 				return i;
@@ -82,4 +82,62 @@ public class ListaArranjo<T> implements Lista<T> {
 		resultado += "]";
 		return resultado;
 	}
+
+	public void removeTodos(Object chave) {
+//		while (true) {
+//			int posicao = busca(chave);
+//			if (posicao == -1) {
+//				break;
+//			}
+//			remove(posicao);
+//		}
+
+//		int posicao = 0;
+//		while (posicao > -1) {
+//			posicao = busca(chave);
+//			if (posicao > -1) {
+//				remove(posicao);
+//			}
+//		}
+
+		int posicao = 0;
+		while (posicao > -1) {
+			posicao = busca(chave);
+			remove(posicao);
+		}
+	}
+
+	@Override
+	public void copia(Object[] arranjo) {
+		for (int i = 0; i < arranjo.length; i++) {
+			adiciona(arranjo[i]);
+		}
+	}
+
+	@Override
+	public boolean igual(Lista lista) {
+		if (this.quantidade() != lista.quantidade()) {
+			return false;
+		}
+		for (int i = 0; i < quantidade(); i++) {
+			if (!pega(i).equals(lista.pega(i))) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

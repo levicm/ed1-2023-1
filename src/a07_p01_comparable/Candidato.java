@@ -29,6 +29,7 @@ public class Candidato implements Comparable {
 			} else if (this.nota < obj.nota) {
 				return -1;
 			} else {
+				// Se as notas forem iguais, usa a idade como critério de desempate
 				if (this.idade > obj.idade) {
 					return 1;
 				} else if (this.idade < obj.idade) {

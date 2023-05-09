@@ -57,6 +57,15 @@ public class ListaArranjo implements Lista {
 		return this.quantidade;
 	}
 
+	public int busca(Object elemento) {
+		for (int i = 0; i < quantidade; ++i) {
+			if (elemento.equals(arranjo[i])) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
 	@Override
 	public String toString() {
 		String resultado = "[";
