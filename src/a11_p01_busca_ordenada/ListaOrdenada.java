@@ -1,4 +1,4 @@
-package a10_lista_ordenada_01;
+package a11_p01_busca_ordenada;
 
 public class ListaOrdenada {
 
@@ -66,8 +66,11 @@ public class ListaOrdenada {
 		try {
 			for (int i = 0; i < quantidade; ++i) {
 				operacoes++;
-				if (elemento.equals(arranjo[i])) {
+				int comparacao = elemento.compareTo(arranjo[i]);
+				if (comparacao == 0) {
 					return i;
+				} else if (comparacao < 0) {
+					break;
 				}
 			}
 			return -1;

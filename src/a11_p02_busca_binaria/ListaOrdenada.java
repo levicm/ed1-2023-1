@@ -1,4 +1,4 @@
-package a10_lista_ordenada_01;
+package a11_p02_busca_binaria;
 
 public class ListaOrdenada {
 
@@ -64,10 +64,18 @@ public class ListaOrdenada {
 	public int busca(Comparable elemento) {
 		int operacoes = 0;
 		try {
-			for (int i = 0; i < quantidade; ++i) {
+			int esquerda = 0;
+			int direita = quantidade - 1;
+			while (esquerda <= direita) {
 				operacoes++;
-				if (elemento.equals(arranjo[i])) {
-					return i;
+				int meio = (esquerda + direita) / 2;
+				int resultado = elemento.compareTo(arranjo[meio]);
+				if (resultado == 0) {
+					return meio;
+				} else if (resultado < 0) { 
+					direita = meio - 1;
+				} else {
+					esquerda = meio + 1;
 				}
 			}
 			return -1;

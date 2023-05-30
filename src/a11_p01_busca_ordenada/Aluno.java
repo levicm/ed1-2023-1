@@ -1,4 +1,4 @@
-package a10_lista_ordenada_01;
+package a11_p01_busca_ordenada;
 
 public class Aluno implements Comparable {
 
