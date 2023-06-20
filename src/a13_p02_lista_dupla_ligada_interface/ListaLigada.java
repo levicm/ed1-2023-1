@@ -1,6 +1,6 @@
-package a12_p01_lista_ligada;
+package a13_p02_lista_dupla_ligada_interface;
 
-public class ListaLigada {
+public class ListaLigada implements Lista {
 
 	private Celula inicio;
 	private int tamanho;

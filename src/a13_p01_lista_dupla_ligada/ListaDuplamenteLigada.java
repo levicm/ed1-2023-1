@@ -1,55 +1,56 @@
-package a12_p01_lista_ligada;
+package a13_p01_lista_dupla_ligada;
 
-public class ListaLigada {
-
+public class ListaDuplamenteLigada {
 	private Celula inicio;
+	private Celula fim;
+	
 	private int tamanho;
 
+	public void adicionaNoComeco(Object elemento) {
+		Celula nova = new Celula(elemento);
+		if (tamanho == 0) {
+			inicio = nova;
+			fim = nova;
+		} else {
+			nova.setProximo(inicio);
+			inicio.setAnterior(nova);
+			inicio = nova;
+		}
+		tamanho++;
+	}
+	
 	public void adiciona(Object elemento) {
-		if (inicio == null) {
+		if (tamanho == 0) {
 			adicionaNoComeco(elemento);
 		} else {
-			Celula ultima = getUltima();
 			Celula nova = new Celula(elemento);
-			ultima.setProximo(nova);
+			nova.setAnterior(fim);
+			fim.setProximo(nova);
+			fim = nova;
 			tamanho++;
 		}
 	}
-
-	private Celula getUltima() {
-		Celula celula = inicio;
-		while (celula.getProximo() != null) {
-			celula = celula.getProximo();
-		}
-		return celula;
-	}
-
+	
 	public void adiciona(Object elemento, int posicao) {
 		if (posicao == 0) {
 			adicionaNoComeco(elemento);
 		} else if (posicao == tamanho) {
 			adiciona(elemento);
 		} else {
-			Celula anterior = pegaCelula(posicao - 1);
-			Celula nova = new Celula(elemento, anterior.getProximo());
-			anterior.setProximo(nova);
+			Celula nova = new Celula(elemento);
+			
+			Celula daPosicao = pegaCelula(posicao);
+			Celula antriorAPosicao = daPosicao.getAnterior();
+			
+			nova.setAnterior(antriorAPosicao);
+			antriorAPosicao.setProximo(nova);
+			
+			daPosicao.setAnterior(nova);
+			nova.setProximo(daPosicao);
 			tamanho++;
 		}
 	}
-
-	public void adicionaNoComeco(Object elemento) {
-		Celula nova = new Celula(elemento, inicio);
-		inicio = nova;
-		tamanho++;
-	}
-
-	public Object pega(int posicao) {
-		if (posicaoOcupada(posicao)) {
-			return pegaCelula(posicao).getElemento();
-		}
-		return null;
-	}
-
+	
 	private Celula pegaCelula(int posicao) {
 		Celula atual = inicio;
 		int i = 0;
@@ -64,20 +65,38 @@ public class ListaLigada {
 		return posicao >= 0 && posicao < this.tamanho;
 	}
 
-	public void remove(int posicao) {
+	public Object pega(int posicao) {
 		if (posicaoOcupada(posicao)) {
-			if (posicao == 0) {
+			return pegaCelula(posicao).getElemento();
+		}
+		return null;
+	}
+	
+	public void remove(int posicao) {
+		if (posicaoOcupada(posicao)) { 
+			if (tamanho == 1) {
+				inicio = null;
+				fim = null;
+			} else if (posicao == 0) {
 				inicio = inicio.getProximo();
+				inicio.setAnterior(null);
+			} else if (posicao == tamanho - 1) {
+				fim = fim.getAnterior();
+				fim.setProximo(null);
 			} else {
-				Celula anterior = pegaCelula(posicao - 1);
-				Celula remover = anterior.getProximo();
-				anterior.setProximo(remover.getProximo());
+				Celula daPosicao = pegaCelula(posicao);
+				Celula depois = daPosicao.getProximo();
+				Celula antes = daPosicao.getAnterior();
+				
+				depois.setAnterior(antes);
+				antes.setProximo(depois);
 			}
+			tamanho--;
 		}
 	}
 
 	public int tamanho() {
-		return this.tamanho;
+		return tamanho;
 	}
 
 	public int busca(Object elemento) {
@@ -116,3 +135,7 @@ public class ListaLigada {
 		return sb.toString();
 	}
 }
+
+
+
+
