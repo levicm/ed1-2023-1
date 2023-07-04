@@ -1,6 +1,6 @@
 package a15_p01_fila_ligada;
 
-public class TesteFile {
+public class TesteFila {
 
 	public static void main(String[] args) {
 		Fila fila = new FilaEncadeada();
@@ -12,6 +12,7 @@ public class TesteFile {
 		fila.adiciona("João");
 		fila.adiciona("Maria");
 		fila.adiciona("Pedro");
+		System.out.println(fila);
 
 		System.out.println(fila.tamanho() == 3);
 		System.out.println(fila.vazia() == false);

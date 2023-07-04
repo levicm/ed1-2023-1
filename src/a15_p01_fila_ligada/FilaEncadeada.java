@@ -1,35 +1,73 @@
 package a15_p01_fila_ligada;
 
 public class FilaEncadeada implements Fila {
+	
+	private Celula inicio;
+	private Celula fim;
+	private int tamanho;
 
 	@Override
 	public void adiciona(Object elemento) {
-		// TODO Auto-generated method stub
-
+		Celula nova = new Celula(elemento);
+		if (tamanho == 0) {
+			inicio = nova;
+			fim = nova;
+		} else {
+			fim.setProximo(nova);
+			nova.setAnterior(fim);
+			fim = nova;
+		}
+		tamanho++;
 	}
 
 	@Override
 	public Object remove() {
-		// TODO Auto-generated method stub
-		return null;
+		if (tamanho == 0) {
+			return null;
+		}
+		Object result = inicio.getElemento();
+		if (tamanho == 1) {
+			inicio = null;
+			fim = null;
+		} else {
+			inicio = inicio.getProximo();
+			inicio.setAnterior(null);
+		}
+		tamanho--;
+		return result;
 	}
 
 	@Override
 	public Object consulta() {
-		// TODO Auto-generated method stub
+		if (inicio != null) {
+			return inicio.getElemento();
+		}
 		return null;
 	}
 
 	@Override
 	public int tamanho() {
-		// TODO Auto-generated method stub
-		return 0;
+		return tamanho;
 	}
 
 	@Override
 	public boolean vazia() {
-		// TODO Auto-generated method stub
-		return false;
+		return tamanho == 0;
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("[");
+		Celula atual = inicio;
+		while (atual != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+			sb.append(atual.getElemento().toString());
+			atual = atual.getProximo();
+		}
+		sb.append("]");
+		return sb.toString();
 	}
 
 }
